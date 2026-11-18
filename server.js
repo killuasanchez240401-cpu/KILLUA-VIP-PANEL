@@ -197,11 +197,12 @@ app.post("/api/validate", (req, res) => {
     });
   }
 
-  res.json({
-    valid: true,
-    message: "License accepted",
-    expiresAt: license.expiresAt
-  });
+res.json({
+  status: "success",
+  valid: true,
+  message: "License accepted",
+  expiresAt: license.expiresAt
+});
 });
 
 app.listen(PORT, () => {
