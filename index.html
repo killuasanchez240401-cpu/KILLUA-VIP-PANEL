@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KILLUA VIP PANEL</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#090510;color:white;
+ font-family:Arial,sans-serif;
+}
+header{
+ padding:22px 15px;text-align:center;
+ background:#10071c;border-bottom:1px solid #542078;
+ color:#c77aff;font-size:25px;font-weight:bold;
+ letter-spacing:4px;text-shadow:0 0 15px #a020f0;
+}
+main{max-width:850px;margin:auto;padding:20px}
+.banner{
+ padding:35px 10px;text-align:center;
+ border:1px solid #8b29c9;border-radius:15px;
+ background:linear-gradient(135deg,#17052c,#39075b,#10051e);
+ box-shadow:0 0 25px #7200a8;
+ margin:20px 0;
+}
+.banner h1{color:#dc9aff;letter-spacing:3px}
+h2{font-size:25px;margin-bottom:5px}
+.sub{color:#aaa;letter-spacing:2px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:22px 0}
+.stat,.section{
+ background:#100d18;border:1px solid #51236e;
+ border-radius:13px;padding:20px;
+}
+.stat{text-align:center}
+.stat small{color:#aaa;font-weight:bold;letter-spacing:2px}
+.stat h2{font-size:30px;margin:12px 0 0}
+.green{color:#4be49b}
+.yellow{color:#ffc43b}
+.red{color:#ff4c5c}
+.purple{color:#ce83ff}
+.section{margin:20px 0}
+.section h3{color:#c77aff;letter-spacing:2px}
+input,select{
+ width:100%;padding:17px;margin:8px 0;
+ background:#08070d;color:white;
+ border:1px solid #593078;border-radius:10px;
+ font-size:16px;
+}
+button{
+ border:0;border-radius:10px;padding:14px;
+ font-size:15px;font-weight:bold;cursor:pointer;
+}
+.primary{
+ width:100%;margin-top:12px;
+ color:white;background:linear-gradient(90deg,#a13cf0,#d32ce5);
+ box-shadow:0 0 15px #9e28d5;
+}
+.action{margin:3px;padding:9px;background:#35154b;color:white}
+.delete{background:#8e263c}
+.key{
+ background:#17101f;border:1px solid #42205c;
+ border-radius:10px;padding:15px;margin:12px 0;
+ overflow-wrap:anywhere;
+}
+.keytop{display:flex;justify-content:space-between;gap:10px}
+.status{font-size:12px;font-weight:bold;color:#4be49b}
+#message{color:#d99aff;margin:12px 0;text-align:center}
+.hidden{display:none}
+footer{text-align:center;color:#777;padding:25px;font-size:13px}
+@media(max-width:400px){.grid{gap:8px}.stat{padding:13px}}
+</style>
+</head>
+<body>
+
+<header>KILLUA VIP PANEL</header>
+
+<main>
+<div id="login" class="section">
+<h2 class="purple">ADMIN LOGIN</h2>
+<p class="sub">Enter your Admin Token</p>
+<input id="token" type="password" placeholder="Admin Token">
+<button class="primary" onclick="login()">LOGIN</button>
+</div>
+
+<div id="dashboard" class="hidden">
+<div class="banner">
+<h1>KILLUA VIP</h1>
+<p>LICENSE KEY MANAGEMENT SYSTEM</p>
+<p class="sub">CONTROL PANEL</p>
+</div>
+
+<h2>CONTROL PANEL</h2>
+<p class="sub">Generate and manage your license keys</p>
+
+<div class="grid">
+<div class="stat"><small>TOTAL KEYS</small><h2 id="total">0</h2></div>
+<div class="stat"><small>ACTIVE</small><h2 class="green" id="active">0</h2></div>
+<div class="stat"><small>PAUSED</small><h2 class="yellow" id="paused">0</h2></div>
+<div class="stat"><small>EXPIRED</small><h2 class="red" id="expired">0</h2></div>
+</div>
+
+<div class="section">
+<h3>TIME EXPIRY</h3>
+<input id="duration" type="number" min="1" value="1">
+<select id="unit">
+<option value="minutes">Minutes</option>
+<option value="hours">Hours</option>
+<option value="days">Days</option>
+<option value="months">Months</option>
+</select>
+<button class="primary" onclick="generateKey()">GENERATE KEY</button>
+</div>
+
+<div class="section">
+<h3>GENERATED KEYS</h3>
+<button class="action" onclick="loadKeys()">REFRESH</button>
+<div id="keys"></div>
+</div>
+</div>
+
+<div id="message"></div>
+</main>
+
+<footer>© KILLUA VIP PANEL</footer>
+
+<script>
+const API_BASE = "https://YOUR-RENDER-SERVER.onrender.com";
+let adminToken = "";
+
+function message(text){
+ document.getElementById("message").textContent=text;
+}
+
+async function api(path,method="GET",body=null){
+ const response=await fetch(API_BASE+path,{
+  method,
+  headers:{
+   "Content-Type":"application/json",
+   "Authorization":"Bearer "+adminToken
+  },
+  body:body?JSON.stringify(body):null
+ });
+ const data=await response.json();
+ if(!response.ok) throw new Error(data.message||"Request failed");
+ return data;
+}
+
+async function login(){
+ adminToken=document.getElementById("token").value.trim();
+ if(!adminToken)return message("Enter your Admin Token.");
+ try{
+  await loadKeys();
+  document.getElementById("login").classList.add("hidden");
+  document.getElementById("dashboard").classList.remove("hidden");
+  message("Login successful!");
+ }catch(e){
+  adminToken="";
+  message("Login failed: "+e.message);
+ }
+}
+
+async function loadKeys(){
+ const data=await api("/api/admin/keys");
+ const keys=data.keys||[];
+ document.getElementById("total").textContent=keys.length;
+ document.getElementById("active").textContent=keys.filter(k=>k.status==="active").length;
+ document.getElementById("paused").textContent=keys.filter(k=>k.status==="paused").length;
+ document.getElementById("expired").textContent=keys.filter(k=>k.status==="expired").length;
+
+ const container=document.getElementById("keys");
+ container.innerHTML="";
+
+ keys.forEach(k=>{
+  const div=document.createElement("div");
+  div.className="key";
+
+  const title=document.createElement("strong");
+  title.textContent=k.key;
+
+  const status=document.createElement("p");
+  status.className="status";
+  status.textContent=(k.status||"unknown").toUpperCase();
+
+  const pause=document.createElement("button");
+  pause.className="action";
+  pause.textContent=k.status==="paused"?"RESUME":"PAUSE";
+  pause.onclick=()=>changeStatus(k.id,k.status==="paused"?"resume":"pause");
+
+  const del=document.createElement("button");
+  del.className="action delete";
+  del.textContent="DELETE";
+  del.onclick=()=>deleteKey(k.id);
+
+  div.append(title,status,pause,del);
+  container.appendChild(div);
+ });
+}
+
+async function generateKey(){
+ const duration=Number(document.getElementById("duration").value);
+ const unit=document.getElementById("unit").value;
+ if(!Number.isInteger(duration)||duration<1)return message("Invalid expiry duration.");
+
+ try{
+  const data=await api("/api/admin/generate","POST",{duration,unit});
+  message("Key generated: "+data.key);
+  await loadKeys();
+ }catch(e){message(e.message);}
+}
+
+async function changeStatus(id,action){
+ try{
+  await api("/api/admin/keys/"+encodeURIComponent(id)+"/"+action,"POST");
+  message("Key updated.");
+  await loadKeys();
+ }catch(e){message(e.message);}
+}
+
+async function deleteKey(id){
+ if(!confirm("Delete this license key?"))return;
+ try{
+  await api("/api/admin/keys/"+encodeURIComponent(id),"DELETE");
+  message("Key deleted.");
+  await loadKeys();
+ }catch(e){message(e.message);}
+}
+</script>
+</body>
+</html>
