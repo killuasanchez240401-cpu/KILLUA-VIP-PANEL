@@ -205,6 +205,11 @@ res.json({
 });
 });
 
+const path = require("path");
+
+app.get("/test", (req, res) => {
+  res.sendFile(path.join(__dirname, "test.html"));
+});
 app.listen(PORT, () => {
   console.log("KILLUA VIP API running on port " + PORT);
 });
