@@ -3,349 +3,345 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>KILLUA VIP PANEL</title>
 
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#08050e;
+  --panel:#100b18;
+  --panel2:#190f24;
+  --purple:#a855f7;
+  --light:#d8a5ff;
+  --border:#382044;
+  --muted:#93849e;
 }
-
-:root {
-  --bg: #080610;
-  --panel: #110d1c;
-  --purple: #a855f7;
-  --light: #c084fc;
-  --border: #342044;
-  --text: #f5eaff;
-  --muted: #a99ab8;
-}
-
-body {
+body{
+  min-height:100vh;
+  padding:14px;
+  color:#f7edff;
   background:
-    radial-gradient(ellipse at top, #28103e 0%, #080610 55%);
-  color: var(--text);
-  font-family: Arial, sans-serif;
-  min-height: 100vh;
-  padding: 18px;
+    radial-gradient(ellipse at 50% 15%,#35104e 0%,#100817 42%,#07050b 85%);
+  font-family:Arial,sans-serif;
 }
-
-.container {
-  width: 100%;
-  max-width: 1050px;
-  margin: auto;
+.container{max-width:1050px;margin:auto}
+header{
+  position:relative;
+  text-align:center;
+  padding:20px 15px;
+  border:1px solid var(--border);
+  border-radius:16px;
+  background:linear-gradient(120deg,#21102f,#100a19);
+  box-shadow:0 0 25px #a855f722;
+  margin-bottom:18px;
 }
-
-header {
-  text-align: center;
-  padding: 28px 15px;
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  background: linear-gradient(135deg, #21102f, #100b19);
-  box-shadow: 0 0 25px #8b35d522;
-  margin-bottom: 20px;
+.logo{
+  color:#e0b4ff;
+  font-size:25px;
+  font-weight:900;
+  letter-spacing:3px;
+  text-shadow:0 0 15px #b45cff;
 }
-
-.logo {
-  font-size: 30px;
-  font-weight: 900;
-  letter-spacing: 3px;
-  color: #d8a5ff;
-  text-shadow: 0 0 15px #a855f7;
+.subtitle{
+  color:#9c8aa9;
+  font-size:10px;
+  letter-spacing:2px;
+  margin-top:7px;
 }
-
-.subtitle {
-  color: var(--muted);
-  font-size: 12px;
-  margin-top: 8px;
-  letter-spacing: 2px;
+.logout-top{
+  position:absolute;
+  right:12px;
+  top:12px;
+  width:auto!important;
+  padding:8px 12px!important;
 }
-
-.panel {
-  background: #100c19ee;
-  border: 1px solid var(--border);
-  border-radius: 15px;
-  padding: 20px;
-  margin-bottom: 18px;
-  box-shadow: 0 0 20px #0008;
+.banner{
+  min-height:150px;
+  margin-bottom:20px;
+  border:1px solid #642b91;
+  border-radius:15px;
+  background:
+    radial-gradient(circle at 20% 50%,#8b24d955,transparent 35%),
+    linear-gradient(120deg,#260b3c,#10051f,#35105a);
+  box-shadow:inset 0 0 35px #a855f733,0 0 20px #8b24d922;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:22px;
+  padding:20px;
+  overflow:hidden;
 }
-
-h2 {
-  color: var(--light);
-  font-size: 18px;
-  margin-bottom: 16px;
+.shield{
+  width:95px;
+  height:95px;
+  border:3px solid #c65aff;
+  border-radius:30% 30% 45% 45%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:43px;
+  color:#dba6ff;
+  text-shadow:0 0 18px #d000ff;
+  box-shadow:0 0 20px #a855f7,inset 0 0 20px #a855f755;
 }
-
-h3 {
-  font-size: 15px;
-  color: #e9d5ff;
+.banner-title{
+  font-size:26px;
+  font-weight:900;
+  color:white;
+  text-shadow:0 0 12px #b84cff;
 }
-
-.stats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin-bottom: 18px;
+.banner-sub{
+  font-size:11px;
+  color:#c9a4dc;
+  margin-top:8px;
 }
-
-.stat {
-  background: linear-gradient(145deg, #211331, #120c1d);
-  border: 1px solid var(--border);
-  border-radius: 13px;
-  padding: 18px 10px;
-  text-align: center;
+.control-title{
+  text-align:center;
+  font-size:27px;
+  font-weight:900;
+  letter-spacing:2px;
+  margin:15px 0 7px;
 }
-
-.stat-number {
-  font-size: 27px;
-  font-weight: bold;
-  color: #d8a5ff;
-  margin-bottom: 7px;
+.control-title span{color:#c77bff}
+.description{
+  text-align:center;
+  color:var(--muted);
+  font-size:12px;
+  margin-bottom:20px;
 }
-
-.stat-label {
-  font-size: 11px;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 1px;
+.stats{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  margin-bottom:18px;
 }
-
-input, select {
-  width: 100%;
-  padding: 13px;
-  color: white;
-  background: #090711;
-  border: 1px solid #49305d;
-  border-radius: 9px;
-  outline: none;
-  margin-bottom: 12px;
-  font-size: 14px;
+.stat{
+  background:linear-gradient(145deg,#1b1026,#100b18);
+  border:1px solid var(--border);
+  border-radius:14px;
+  text-align:center;
+  padding:19px 10px;
 }
-
-input:focus, select:focus {
-  border-color: var(--purple);
-  box-shadow: 0 0 10px #a855f744;
+.stat-number{
+  color:#d6a0ff;
+  font-size:30px;
+  font-weight:900;
+  margin-bottom:8px;
 }
-
-select option {
-  background: #100c19;
+.stat-label{
+  color:#9b8ba5;
+  font-size:11px;
+  letter-spacing:2px;
 }
-
-button {
-  border: none;
-  border-radius: 8px;
-  padding: 11px 14px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: .2s;
+.stat.active .stat-number{color:#69e6a0}
+.stat.paused .stat-number{color:#ffd36b}
+.stat.expired .stat-number{color:#ff718b}
+.panel{
+  background:#100b18ed;
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:19px;
+  margin-bottom:18px;
+  box-shadow:0 0 18px #0006;
 }
-
-button:hover {
-  filter: brightness(1.2);
-  transform: translateY(-1px);
+h2{
+  color:#c78aff;
+  font-size:17px;
+  margin-bottom:17px;
 }
-
-.primary {
-  background: linear-gradient(90deg, #7e22ce, #a855f7);
-  color: white;
-  width: 100%;
-  padding: 14px;
-  box-shadow: 0 0 14px #9333ea44;
+input,select{
+  width:100%;
+  min-width:0;
+  padding:13px;
+  border-radius:9px;
+  border:1px solid #49305b;
+  background:#090610;
+  color:white;
+  outline:none;
+  font-size:14px;
 }
-
-.secondary {
-  background: #30203f;
-  border: 1px solid #654080;
-  color: #e9d5ff;
+input:focus,select:focus{
+  border-color:#bd65ff;
+  box-shadow:0 0 10px #a855f744;
 }
-
-.danger {
-  background: #4a172c;
-  border: 1px solid #a83259;
-  color: #ffb5ca;
+select option{background:#100b18}
+.row{
+  display:flex;
+  gap:10px;
+  margin-bottom:12px;
 }
-
-.success {
-  background: #143b2c;
-  border: 1px solid #287a55;
-  color: #a7f3d0;
+.row>*{flex:1}
+button{
+  border:0;
+  border-radius:8px;
+  padding:11px 13px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:.2s;
 }
-
-.warning {
-  background: #493515;
-  border: 1px solid #98702b;
-  color: #fde68a;
+button:disabled{opacity:.5;cursor:not-allowed}
+button:not(:disabled):active{transform:scale(.98)}
+.primary{
+  width:100%;
+  padding:15px;
+  color:white;
+  background:linear-gradient(90deg,#8a20d4,#c344f4);
+  box-shadow:0 0 15px #a855f755;
 }
-
-.row {
-  display: flex;
-  gap: 10px;
+.secondary{
+  color:#e9d5ff;
+  background:#30203f;
+  border:1px solid #604078;
 }
-
-.row > * {
-  flex: 1;
-  min-width: 0;
+.success{
+  color:#a7f3d0;
+  background:#16452f;
+  border:1px solid #287a55;
 }
-
-.key-card {
-  background: linear-gradient(145deg, #1a1025, #100c19);
-  border: 1px solid #49305d;
-  border-radius: 12px;
-  padding: 16px;
-  margin-top: 12px;
+.warning{
+  color:#fde68a;
+  background:#493515;
+  border:1px solid #98702b;
 }
-
-.key-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
+.danger{
+  color:#ffc0d0;
+  background:#50172e;
+  border:1px solid #963453;
 }
-
-.key-value {
-  font-size: 14px;
-  font-weight: bold;
-  color: #d8b4fe;
-  word-break: break-all;
-  margin: 10px 0;
+.message{
+  margin-top:12px;
+  font-size:13px;
+  overflow-wrap:anywhere;
 }
-
-.status {
-  font-size: 11px;
-  padding: 6px 10px;
-  border-radius: 20px;
-  text-transform: uppercase;
-  font-weight: bold;
+.toolbar{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  margin-bottom:12px;
 }
-
-.status-active {
-  color: #86efac;
-  background: #14532d55;
-  border: 1px solid #287a55;
+.toolbar input{flex:1}
+.key-card{
+  background:linear-gradient(145deg,#1b1026,#100b18);
+  border:1px solid #49305d;
+  border-radius:12px;
+  padding:14px;
+  margin-top:12px;
 }
-
-.status-paused {
-  color: #fde68a;
-  background: #713f1255;
-  border: 1px solid #98702b;
+.key-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
 }
-
-.status-expired {
-  color: #fda4af;
-  background: #88133755;
-  border: 1px solid #a83259;
+.key-heading{
+  font-size:13px;
+  font-weight:bold;
 }
-
-.key-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 12px;
+.key-value{
+  color:#d5a4fa;
+  font-size:13px;
+  font-weight:bold;
+  overflow-wrap:anywhere;
+  margin:12px 0;
 }
-
-.key-actions button {
-  flex: 1;
-  min-width: 75px;
-  font-size: 12px;
+.status{
+  font-size:10px;
+  font-weight:bold;
+  padding:6px 10px;
+  border-radius:20px;
+  text-transform:uppercase;
 }
-
-.details {
-  display: none;
-  border-top: 1px solid var(--border);
-  margin-top: 14px;
-  padding-top: 13px;
+.status-active{
+  color:#86efac;
+  background:#14532d55;
+  border:1px solid #287a55;
 }
-
-.details.open {
-  display: block;
+.status-paused{
+  color:#fde68a;
+  background:#713f1255;
+  border:1px solid #98702b;
 }
-
-.detail-line {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 7px 0;
-  font-size: 12px;
-  border-bottom: 1px solid #ffffff0c;
+.status-expired{
+  color:#fda4af;
+  background:#88133755;
+  border:1px solid #a83259;
 }
-
-.detail-line span:first-child {
-  color: var(--muted);
+.key-actions{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:7px;
 }
-
-.detail-line span:last-child {
-  text-align: right;
-  overflow-wrap: anywhere;
+.key-actions button{
+  width:100%;
+  font-size:11px;
+  padding:11px 5px;
 }
-
-.countdown {
-  color: #d8a5ff !important;
-  font-weight: bold;
+.details{
+  display:none;
+  border-top:1px solid #382044;
+  margin-top:13px;
+  padding-top:10px;
 }
-
-.message {
-  margin-top: 12px;
-  font-size: 13px;
-  color: #c4b5fd;
-  overflow-wrap: anywhere;
+.details.open{display:block}
+.detail-line{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  padding:8px 0;
+  border-bottom:1px solid #ffffff0d;
+  font-size:12px;
 }
-
-.empty {
-  text-align: center;
-  color: var(--muted);
-  padding: 25px 5px;
-  font-size: 13px;
+.detail-line span:first-child{color:#9b8ba5}
+.detail-line span:last-child{
+  text-align:right;
+  overflow-wrap:anywhere;
 }
-
-.toolbar {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 12px;
+.countdown{
+  color:#86efac!important;
+  font-weight:bold;
 }
-
-.toolbar input {
-  margin: 0;
+.empty{
+  text-align:center;
+  color:var(--muted);
+  padding:25px 5px;
+  font-size:13px;
 }
-
-.login-screen {
-  max-width: 420px;
-  margin: 65px auto;
+.view-button{
+  width:auto;
+  white-space:nowrap;
 }
-
-.hidden {
-  display: none !important;
+.refresh{
+  width:100%;
+  margin-top:14px;
 }
-
-.footer {
-  text-align: center;
-  color: #766783;
-  font-size: 11px;
-  padding: 18px;
+.footer{
+  text-align:center;
+  padding:18px 8px;
+  color:#796782;
+  font-size:11px;
 }
+.login-screen{
+  max-width:430px;
+  margin:65px auto;
+}
+.hidden{display:none!important}
 
-@media(max-width: 650px) {
-  body {
-    padding: 10px;
-  }
-
-  .stats {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .panel {
-    padding: 15px;
-  }
-
-  .logo {
-    font-size: 25px;
-  }
-
-  .detail-line {
-    font-size: 11px;
-  }
+@media(min-width:700px){
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .banner{min-height:185px}
+}
+@media(max-width:480px){
+  body{padding:10px}
+  .panel{padding:14px}
+  .logo{font-size:23px}
+  .banner{min-height:125px;gap:14px}
+  .shield{width:72px;height:72px;font-size:32px}
+  .banner-title{font-size:20px}
+  .control-title{font-size:23px}
+  .key-actions{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .key-value{font-size:12px}
+  .logout-top{font-size:10px;padding:7px 9px!important}
 }
 </style>
 </head>
@@ -355,10 +351,9 @@ button:hover {
 
   <div id="loginScreen" class="login-screen panel">
     <header>
-      <div class="logo">KILLUA VIP</div>
-      <div class="subtitle">ADMIN CONTROL PANEL</div>
+      <div class="logo">KILLUA VIP PANEL</div>
+      <div class="subtitle">LICENSE MANAGEMENT SYSTEM</div>
     </header>
-
     <h2>Admin Login</h2>
     <input id="tokenInput" type="password"
       placeholder="Enter Admin Token">
@@ -369,76 +364,88 @@ button:hover {
   <main id="mainPanel" class="hidden">
 
     <header>
-      <div class="logo">KILLUA VIP</div>
+      <div class="logo">KILLUA VIP PANEL</div>
       <div class="subtitle">LICENSE MANAGEMENT SYSTEM</div>
+      <button class="danger logout-top" id="topLogout">Logout ↪</button>
     </header>
 
-    <div class="stats">
+    <section class="banner">
+      <div class="shield">♙</div>
+      <div>
+        <div class="banner-title">KILLUA<br>VIP PANEL</div>
+        <div class="banner-sub">LICENSE CONTROL SYSTEM</div>
+      </div>
+    </section>
+
+    <div class="control-title">CONTROL <span>PANEL</span></div>
+    <div class="description">Generate and manage your license keys</div>
+
+    <section class="stats">
       <div class="stat">
         <div class="stat-number" id="totalCount">0</div>
-        <div class="stat-label">Total Keys</div>
+        <div class="stat-label">TOTAL KEYS</div>
       </div>
-      <div class="stat">
+      <div class="stat active">
         <div class="stat-number" id="activeCount">0</div>
-        <div class="stat-label">Active</div>
+        <div class="stat-label">ACTIVE</div>
       </div>
-      <div class="stat">
+      <div class="stat paused">
         <div class="stat-number" id="pausedCount">0</div>
-        <div class="stat-label">Paused</div>
+        <div class="stat-label">PAUSED</div>
       </div>
-      <div class="stat">
+      <div class="stat expired">
         <div class="stat-number" id="expiredCount">0</div>
-        <div class="stat-label">Expired</div>
+        <div class="stat-label">EXPIRED</div>
       </div>
-    </div>
+    </section>
 
     <section class="panel">
-      <h2>✦ Generate New Key</h2>
+      <h2>✦ TIME EXPIRY</h2>
 
       <div class="row">
         <input id="durationInput" type="number"
-          min="1" max="365" value="1"
-          placeholder="Duration">
+          min="1" max="365" value="1" placeholder="Duration">
         <select id="unitInput">
           <option value="minutes">Minutes</option>
           <option value="hours">Hours</option>
           <option value="days" selected>Days</option>
           <option value="months">Months</option>
+          <option value="years">Years</option>
+          <option value="lifetime">Lifetime ♾️</option>
         </select>
       </div>
 
-      <button class="primary" id="generateBtn">
-        GENERATE KEY
-      </button>
+      <button class="primary" id="generateBtn">GENERATE KEY</button>
       <div id="generateMessage" class="message"></div>
     </section>
 
     <section class="panel">
-      <h2>✦ Generated Keys</h2>
-
       <div class="toolbar">
-        <input id="searchInput" type="text"
-          placeholder="Search key...">
+        <h2 style="margin:0;flex:1">✦ GENERATED KEYS</h2>
+        <button class="secondary view-button" id="viewAllBtn">VIEW ALL⌄</button>
       </div>
+
+      <input id="searchInput" type="text"
+        placeholder="Search key...">
 
       <div id="keysList">
         <div class="empty">Loading keys...</div>
       </div>
 
-      <button class="secondary" id="refreshBtn"
-        style="width:100%;margin-top:15px">
+      <button class="secondary refresh" id="refreshBtn">
         ↻ REFRESH KEYS
       </button>
     </section>
 
-    <button class="danger" id="logoutBtn"
-      style="width:100%">
+    <button class="danger" id="logoutBtn" style="width:100%">
       LOGOUT
     </button>
 
   </main>
 
-  <div class="footer">KILLUA VIP PANEL</div>
+  <div class="footer">
+    © All Rights Reserved | KILLUA VIP PANEL
+  </div>
 </div>
 
 <script>
@@ -446,21 +453,22 @@ const API_BASE = "https://killua-vip-api.onrender.com";
 
 let adminToken = "";
 let licenses = [];
+let showAll = false;
 let countdownTimer = null;
 
 const $ = id => document.getElementById(id);
 
-function showMessage(id, message, color) {
+function showMessage(id, message, color="#c9a4dc") {
   const el = $(id);
   el.textContent = message;
-  if (color) el.style.color = color;
+  el.style.color = color;
 }
 
-async function api(path, method = "GET", body = null) {
+async function api(path, method="GET", body=null) {
   const options = {
     method,
     headers: {
-      "Authorization": "Bearer " + adminToken
+      Authorization: "Bearer " + adminToken
     }
   };
 
@@ -477,8 +485,8 @@ async function api(path, method = "GET", body = null) {
   } catch (_) {}
 
   if (!response.ok) {
-    throw new Error(data.error || data.message ||
-      "Request failed (" + response.status + ")");
+    throw new Error(data.message || data.error ||
+      "Request failed: " + response.status);
   }
 
   return data;
@@ -486,19 +494,20 @@ async function api(path, method = "GET", body = null) {
 
 function formatDate(timestamp) {
   if (!timestamp) return "Not available";
-
   const date = new Date(timestamp);
   if (Number.isNaN(date.getTime())) return "Not available";
-
   return date.toLocaleString();
 }
 
 function formatDuration(duration, unit) {
+  if (unit === "lifetime") return "LIFETIME ♾️";
   if (!duration || !unit) return "Not available";
   return duration + " " + unit;
 }
 
-function getRemaining(expiresAt) {
+function getRemaining(expiresAt, unit) {
+  if (unit === "lifetime") return "LIFETIME ♾️";
+
   const remaining = Number(expiresAt) - Date.now();
 
   if (!Number.isFinite(remaining) || remaining <= 0) {
@@ -515,21 +524,18 @@ function getRemaining(expiresAt) {
     minutes + "m " + secs + "s";
 }
 
-function makeElement(tag, className, text) {
-  const element = document.createElement(tag);
-  if (className) element.className = className;
-  if (text !== undefined) element.textContent = text;
-  return element;
+function makeElement(tag, className, value) {
+  const el = document.createElement(tag);
+  if (className) el.className = className;
+  if (value !== undefined) el.textContent = value;
+  return el;
 }
 
-function addDetail(container, label, value, extraClass = "") {
+function addDetail(container, label, value, extraClass="") {
   const line = makeElement("div", "detail-line");
-  const left = makeElement("span", "", label);
-  const right = makeElement("span", extraClass, value);
-
-  line.append(left, right);
+  line.appendChild(makeElement("span", "", label));
+  line.appendChild(makeElement("span", extraClass, value));
   container.appendChild(line);
-  return right;
 }
 
 function updateStats() {
@@ -548,14 +554,21 @@ function renderKeys() {
   const list = $("keysList");
   list.replaceChildren();
 
-  const search = $("searchInput").value
-    .trim().toLowerCase();
+  const search = $("searchInput").value.trim().toLowerCase();
 
-  const filtered = licenses.filter(license =>
-    String(license.key || "").toLowerCase().includes(search)
+  const filtered = licenses.filter(x =>
+    String(x.key || "").toLowerCase().includes(search)
   );
 
-  if (!filtered.length) {
+  const visible = showAll || search ? filtered : filtered.slice(0, 3);
+
+  $("viewAllBtn").classList.toggle(
+    "hidden", filtered.length <= 3
+  );
+  $("viewAllBtn").textContent =
+    showAll ? "SHOW LESS⌃" : "VIEW ALL⌄";
+
+  if (!visible.length) {
     list.appendChild(makeElement(
       "div", "empty",
       licenses.length ? "No matching keys found." :
@@ -564,23 +577,21 @@ function renderKeys() {
     return;
   }
 
-  filtered.forEach(license => {
+  visible.forEach(license => {
     const card = makeElement("div", "key-card");
+    const status = String(license.status || "unknown").toLowerCase();
 
     const top = makeElement("div", "key-top");
-    top.appendChild(makeElement("h3", "", "LICENSE KEY"));
+    top.appendChild(makeElement("div", "key-heading", "LICENSE KEY"));
 
-    const status = String(license.status || "unknown").toLowerCase();
-    const statusBadge = makeElement(
+    const badge = makeElement(
       "span",
-      "status status-" + (
-        ["active", "paused", "expired"].includes(status)
-          ? status : "expired"
-      ),
+      "status status-" +
+      (["active","paused","expired"].includes(status) ? status : "expired"),
       status
     );
 
-    top.appendChild(statusBadge);
+    top.appendChild(badge);
     card.appendChild(top);
 
     card.appendChild(makeElement(
@@ -592,22 +603,15 @@ function renderKeys() {
     const copyBtn = makeElement("button", "secondary", "COPY");
     copyBtn.addEventListener("click", async () => {
       try {
-        await navigator.clipboard.writeText(
-          String(license.key || "")
-        );
+        await navigator.clipboard.writeText(String(license.key || ""));
         copyBtn.textContent = "COPIED!";
         setTimeout(() => copyBtn.textContent = "COPY", 1500);
       } catch (_) {
-        showMessage(
-          "generateMessage",
-          "Copy unavailable. Select and copy the key manually."
-        );
+        alert("Copy unavailable. Please copy the key manually.");
       }
     });
 
-    const detailsBtn = makeElement(
-      "button", "secondary", "DETAILS"
-    );
+    const detailsBtn = makeElement("button", "secondary", "DETAILS");
 
     const pauseBtn = makeElement(
       "button",
@@ -623,6 +627,7 @@ function renderKeys() {
 
       try {
         const action = status === "paused" ? "resume" : "pause";
+
         await api(
           "/api/admin/keys/" + encodeURIComponent(license.id) +
           "/" + action,
@@ -636,9 +641,7 @@ function renderKeys() {
       }
     });
 
-    const deleteBtn = makeElement(
-      "button", "danger", "DELETE"
-    );
+    const deleteBtn = makeElement("button", "danger", "DELETE");
 
     deleteBtn.addEventListener("click", async () => {
       if (!confirm("Delete this key permanently?")) return;
@@ -662,31 +665,24 @@ function renderKeys() {
 
     const details = makeElement("div", "details");
 
-    addDetail(
-      details, "Key ID",
-      license.id || "Not available"
-    );
+    addDetail(details, "Key ID", license.id || "Not available");
+    addDetail(details, "Time Valid",
+      formatDuration(license.duration, license.unit));
+    addDetail(details, "HWID / IP",
+      "Not linked by current API");
+    addDetail(details, "Created", formatDate(license.createdAt));
+    addDetail(details, "Expires At",
+      license.unit === "lifetime"
+        ? "LIFETIME"
+        : formatDate(license.expiresAt));
 
-    addDetail(
-      details, "Validity",
-      formatDuration(license.duration, license.unit)
-    );
+    const countdown = makeElement("span", "countdown",
+      getRemaining(license.expiresAt, license.unit));
 
-    addDetail(
-      details, "Created",
-      formatDate(license.createdAt)
-    );
-
-    addDetail(
-      details, "Expires",
-      formatDate(license.expiresAt)
-    );
-
-    const countdown = addDetail(
-      details, "Time Remaining",
-      getRemaining(license.expiresAt),
-      "countdown"
-    );
+    const timeLine = makeElement("div", "detail-line");
+    timeLine.appendChild(makeElement("span", "", "Time Left"));
+    timeLine.appendChild(countdown);
+    details.appendChild(timeLine);
 
     detailsBtn.addEventListener("click", () => {
       details.classList.toggle("open");
@@ -697,10 +693,6 @@ function renderKeys() {
 
     card.appendChild(details);
     list.appendChild(card);
-
-    if (details.classList.contains("open")) {
-      countdown.textContent = getRemaining(license.expiresAt);
-    }
   });
 }
 
@@ -714,10 +706,10 @@ async function loadKeys() {
   } catch (error) {
     showMessage("generateMessage", error.message, "#fda4af");
 
-    if (error.message.toLowerCase().includes("unauthorized") ||
-        error.message.toLowerCase().includes("invalid token")) {
+    if (error.message.toLowerCase().includes("unauthorized")) {
       logout();
     }
+    throw error;
   } finally {
     $("refreshBtn").disabled = false;
   }
@@ -752,7 +744,9 @@ async function login() {
         const countdown = details.querySelector(".countdown");
 
         if (license && countdown) {
-          countdown.textContent = getRemaining(license.expiresAt);
+          countdown.textContent = getRemaining(
+            license.expiresAt, license.unit
+          );
         }
       });
     }, 1000);
@@ -768,8 +762,10 @@ async function login() {
 async function generateKey() {
   const duration = Number($("durationInput").value);
   const unit = $("unitInput").value;
+  const isLifetime = unit === "lifetime";
 
-  if (!Number.isInteger(duration) || duration < 1 || duration > 365) {
+  if (!isLifetime &&
+      (!Number.isInteger(duration) || duration < 1 || duration > 365)) {
     showMessage(
       "generateMessage",
       "Duration must be a whole number from 1 to 365.",
@@ -783,7 +779,7 @@ async function generateKey() {
 
   try {
     const data = await api("/api/admin/generate", "POST", {
-      duration,
+      duration: isLifetime ? 1 : duration,
       unit
     });
 
@@ -793,6 +789,7 @@ async function generateKey() {
       "#86efac"
     );
 
+    showAll = true;
     await loadKeys();
 
   } catch (error) {
@@ -806,6 +803,7 @@ async function generateKey() {
 function logout() {
   adminToken = "";
   licenses = [];
+  showAll = false;
 
   if (countdownTimer) {
     clearInterval(countdownTimer);
@@ -827,9 +825,28 @@ $("tokenInput").addEventListener("keydown", event => {
 });
 
 $("generateBtn").addEventListener("click", generateKey);
-$("refreshBtn").addEventListener("click", loadKeys);
+$("refreshBtn").addEventListener("click", async () => {
+  try {
+    await loadKeys();
+  } catch (_) {}
+});
+
 $("logoutBtn").addEventListener("click", logout);
+$("topLogout").addEventListener("click", logout);
+
 $("searchInput").addEventListener("input", renderKeys);
+
+$("viewAllBtn").addEventListener("click", () => {
+  showAll = !showAll;
+  renderKeys();
+});
+
+$("unitInput").addEventListener("change", () => {
+  const lifetime = $("unitInput").value === "lifetime";
+  $("durationInput").disabled = lifetime;
+  $("durationInput").style.opacity = lifetime ? ".4" : "1";
+});
+
 </script>
 </body>
 </html>
