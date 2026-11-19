@@ -17,6 +17,8 @@ const ADMIN_TOKEN = process.env.ADMIN_TOKEN;
 app.use(cors());
 app.use(express.json());
 
+const LIFETIME_EXPIRY = "9999-12-31T23:59:59.999Z";
+
 function makeKey() {
   const random = crypto.randomBytes(12).toString("hex").toUpperCase();
   return "KILLUA-" + random.match(/.{1,4}/g).join("-");
@@ -49,6 +51,7 @@ async function updateExpired() {
     .from("licenses")
     .update({ status: "expired" })
     .eq("status", "active")
+    .neq("unit", "lifetime")
     .lte("expires_at", new Date().toISOString());
 
   if (error) throw error;
@@ -91,23 +94,31 @@ app.post("/api/admin/generate", adminAuth, async (req, res) => {
       minutes: 60 * 1000,
       hours: 60 * 60 * 1000,
       days: 24 * 60 * 60 * 1000,
-      months: 30 * 24 * 60 * 60 * 1000
+      months: 30 * 24 * 60 * 60 * 1000,
+      years: 365 * 24 * 60 * 60 * 1000
     };
 
+    const isLifetime = unit === "lifetime";
+
     if (
-      !Number.isSafeInteger(duration) ||
-      duration < 1 ||
-      duration > 365 ||
-      !units[unit]
+      (!isLifetime &&
+        (!Number.isSafeInteger(duration) ||
+          duration < 1 ||
+          duration > 365)) ||
+      (!isLifetime && !units[unit])
     ) {
       return res.status(400).json({
         message: "Invalid duration or unit"
       });
     }
 
-    const expiresAt = new Date(
-      Date.now() + duration * units[unit]
-    ).toISOString();
+    const validDuration = isLifetime ? 1 : duration;
+
+    const expiresAt = isLifetime
+      ? LIFETIME_EXPIRY
+      : new Date(
+          Date.now() + validDuration * units[unit]
+        ).toISOString();
 
     const { data, error } = await supabase
       .from("licenses")
@@ -115,7 +126,7 @@ app.post("/api/admin/generate", adminAuth, async (req, res) => {
         license_key: makeKey(),
         status: "active",
         expires_at: expiresAt,
-        duration,
+        duration: validDuration,
         unit
       })
       .select("*")
@@ -189,9 +200,10 @@ app.post("/api/admin/keys/:id/resume", adminAuth, async (req, res) => {
     }
 
     const newStatus =
-      Date.now() >= Date.parse(key.expires_at)
-        ? "expired"
-        : "active";
+      key.unit === "lifetime" ||
+      Date.now() < Date.parse(key.expires_at)
+        ? "active"
+        : "expired";
 
     const { error: updateError } = await supabase
       .from("licenses")
@@ -262,9 +274,12 @@ app.post("/api/validate", async (req, res) => {
       });
     }
 
+    const isLifetime = license.unit === "lifetime";
+
     if (
       license.status === "expired" ||
-      Date.now() >= Date.parse(license.expires_at)
+      (!isLifetime &&
+        Date.now() >= Date.parse(license.expires_at))
     ) {
       return res.status(403).json({
         valid: false,
