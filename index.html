@@ -5,227 +5,831 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KILLUA VIP PANEL</title>
+
 <style>
-*{box-sizing:border-box}
-body{
- margin:0;background:#090510;color:white;
- font-family:Arial,sans-serif;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
-header{
- padding:22px 15px;text-align:center;
- background:#10071c;border-bottom:1px solid #542078;
- color:#c77aff;font-size:25px;font-weight:bold;
- letter-spacing:4px;text-shadow:0 0 15px #a020f0;
+
+:root {
+  --bg: #080610;
+  --panel: #110d1c;
+  --purple: #a855f7;
+  --light: #c084fc;
+  --border: #342044;
+  --text: #f5eaff;
+  --muted: #a99ab8;
 }
-main{max-width:850px;margin:auto;padding:20px}
-.banner{
- padding:35px 10px;text-align:center;
- border:1px solid #8b29c9;border-radius:15px;
- background:linear-gradient(135deg,#17052c,#39075b,#10051e);
- box-shadow:0 0 25px #7200a8;
- margin:20px 0;
+
+body {
+  background:
+    radial-gradient(ellipse at top, #28103e 0%, #080610 55%);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  padding: 18px;
 }
-.banner h1{color:#dc9aff;letter-spacing:3px}
-h2{font-size:25px;margin-bottom:5px}
-.sub{color:#aaa;letter-spacing:2px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:22px 0}
-.stat,.section{
- background:#100d18;border:1px solid #51236e;
- border-radius:13px;padding:20px;
+
+.container {
+  width: 100%;
+  max-width: 1050px;
+  margin: auto;
 }
-.stat{text-align:center}
-.stat small{color:#aaa;font-weight:bold;letter-spacing:2px}
-.stat h2{font-size:30px;margin:12px 0 0}
-.green{color:#4be49b}
-.yellow{color:#ffc43b}
-.red{color:#ff4c5c}
-.purple{color:#ce83ff}
-.section{margin:20px 0}
-.section h3{color:#c77aff;letter-spacing:2px}
-input,select{
- width:100%;padding:17px;margin:8px 0;
- background:#08070d;color:white;
- border:1px solid #593078;border-radius:10px;
- font-size:16px;
+
+header {
+  text-align: center;
+  padding: 28px 15px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: linear-gradient(135deg, #21102f, #100b19);
+  box-shadow: 0 0 25px #8b35d522;
+  margin-bottom: 20px;
 }
-button{
- border:0;border-radius:10px;padding:14px;
- font-size:15px;font-weight:bold;cursor:pointer;
+
+.logo {
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  color: #d8a5ff;
+  text-shadow: 0 0 15px #a855f7;
 }
-.primary{
- width:100%;margin-top:12px;
- color:white;background:linear-gradient(90deg,#a13cf0,#d32ce5);
- box-shadow:0 0 15px #9e28d5;
+
+.subtitle {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 8px;
+  letter-spacing: 2px;
 }
-.action{margin:3px;padding:9px;background:#35154b;color:white}
-.delete{background:#8e263c}
-.key{
- background:#17101f;border:1px solid #42205c;
- border-radius:10px;padding:15px;margin:12px 0;
- overflow-wrap:anywhere;
+
+.panel {
+  background: #100c19ee;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 18px;
+  box-shadow: 0 0 20px #0008;
 }
-.keytop{display:flex;justify-content:space-between;gap:10px}
-.status{font-size:12px;font-weight:bold;color:#4be49b}
-#message{color:#d99aff;margin:12px 0;text-align:center}
-.hidden{display:none}
-footer{text-align:center;color:#777;padding:25px;font-size:13px}
-@media(max-width:400px){.grid{gap:8px}.stat{padding:13px}}
+
+h2 {
+  color: var(--light);
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+
+h3 {
+  font-size: 15px;
+  color: #e9d5ff;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.stat {
+  background: linear-gradient(145deg, #211331, #120c1d);
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  padding: 18px 10px;
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 27px;
+  font-weight: bold;
+  color: #d8a5ff;
+  margin-bottom: 7px;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+input, select {
+  width: 100%;
+  padding: 13px;
+  color: white;
+  background: #090711;
+  border: 1px solid #49305d;
+  border-radius: 9px;
+  outline: none;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+input:focus, select:focus {
+  border-color: var(--purple);
+  box-shadow: 0 0 10px #a855f744;
+}
+
+select option {
+  background: #100c19;
+}
+
+button {
+  border: none;
+  border-radius: 8px;
+  padding: 11px 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: .2s;
+}
+
+button:hover {
+  filter: brightness(1.2);
+  transform: translateY(-1px);
+}
+
+.primary {
+  background: linear-gradient(90deg, #7e22ce, #a855f7);
+  color: white;
+  width: 100%;
+  padding: 14px;
+  box-shadow: 0 0 14px #9333ea44;
+}
+
+.secondary {
+  background: #30203f;
+  border: 1px solid #654080;
+  color: #e9d5ff;
+}
+
+.danger {
+  background: #4a172c;
+  border: 1px solid #a83259;
+  color: #ffb5ca;
+}
+
+.success {
+  background: #143b2c;
+  border: 1px solid #287a55;
+  color: #a7f3d0;
+}
+
+.warning {
+  background: #493515;
+  border: 1px solid #98702b;
+  color: #fde68a;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+.row > * {
+  flex: 1;
+  min-width: 0;
+}
+
+.key-card {
+  background: linear-gradient(145deg, #1a1025, #100c19);
+  border: 1px solid #49305d;
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 12px;
+}
+
+.key-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.key-value {
+  font-size: 14px;
+  font-weight: bold;
+  color: #d8b4fe;
+  word-break: break-all;
+  margin: 10px 0;
+}
+
+.status {
+  font-size: 11px;
+  padding: 6px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.status-active {
+  color: #86efac;
+  background: #14532d55;
+  border: 1px solid #287a55;
+}
+
+.status-paused {
+  color: #fde68a;
+  background: #713f1255;
+  border: 1px solid #98702b;
+}
+
+.status-expired {
+  color: #fda4af;
+  background: #88133755;
+  border: 1px solid #a83259;
+}
+
+.key-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.key-actions button {
+  flex: 1;
+  min-width: 75px;
+  font-size: 12px;
+}
+
+.details {
+  display: none;
+  border-top: 1px solid var(--border);
+  margin-top: 14px;
+  padding-top: 13px;
+}
+
+.details.open {
+  display: block;
+}
+
+.detail-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 7px 0;
+  font-size: 12px;
+  border-bottom: 1px solid #ffffff0c;
+}
+
+.detail-line span:first-child {
+  color: var(--muted);
+}
+
+.detail-line span:last-child {
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.countdown {
+  color: #d8a5ff !important;
+  font-weight: bold;
+}
+
+.message {
+  margin-top: 12px;
+  font-size: 13px;
+  color: #c4b5fd;
+  overflow-wrap: anywhere;
+}
+
+.empty {
+  text-align: center;
+  color: var(--muted);
+  padding: 25px 5px;
+  font-size: 13px;
+}
+
+.toolbar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.toolbar input {
+  margin: 0;
+}
+
+.login-screen {
+  max-width: 420px;
+  margin: 65px auto;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.footer {
+  text-align: center;
+  color: #766783;
+  font-size: 11px;
+  padding: 18px;
+}
+
+@media(max-width: 650px) {
+  body {
+    padding: 10px;
+  }
+
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .panel {
+    padding: 15px;
+  }
+
+  .logo {
+    font-size: 25px;
+  }
+
+  .detail-line {
+    font-size: 11px;
+  }
+}
 </style>
 </head>
+
 <body>
+<div class="container">
 
-<header>KILLUA VIP PANEL</header>
+  <div id="loginScreen" class="login-screen panel">
+    <header>
+      <div class="logo">KILLUA VIP</div>
+      <div class="subtitle">ADMIN CONTROL PANEL</div>
+    </header>
 
-<main>
-<div id="login" class="section">
-<h2 class="purple">ADMIN LOGIN</h2>
-<p class="sub">Enter your Admin Token</p>
-<input id="token" type="password" placeholder="Admin Token">
-<button class="primary" onclick="login()">LOGIN</button>
+    <h2>Admin Login</h2>
+    <input id="tokenInput" type="password"
+      placeholder="Enter Admin Token">
+    <button class="primary" id="loginBtn">LOGIN</button>
+    <div id="loginMessage" class="message"></div>
+  </div>
+
+  <main id="mainPanel" class="hidden">
+
+    <header>
+      <div class="logo">KILLUA VIP</div>
+      <div class="subtitle">LICENSE MANAGEMENT SYSTEM</div>
+    </header>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-number" id="totalCount">0</div>
+        <div class="stat-label">Total Keys</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number" id="activeCount">0</div>
+        <div class="stat-label">Active</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number" id="pausedCount">0</div>
+        <div class="stat-label">Paused</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number" id="expiredCount">0</div>
+        <div class="stat-label">Expired</div>
+      </div>
+    </div>
+
+    <section class="panel">
+      <h2>✦ Generate New Key</h2>
+
+      <div class="row">
+        <input id="durationInput" type="number"
+          min="1" max="365" value="1"
+          placeholder="Duration">
+        <select id="unitInput">
+          <option value="minutes">Minutes</option>
+          <option value="hours">Hours</option>
+          <option value="days" selected>Days</option>
+          <option value="months">Months</option>
+        </select>
+      </div>
+
+      <button class="primary" id="generateBtn">
+        GENERATE KEY
+      </button>
+      <div id="generateMessage" class="message"></div>
+    </section>
+
+    <section class="panel">
+      <h2>✦ Generated Keys</h2>
+
+      <div class="toolbar">
+        <input id="searchInput" type="text"
+          placeholder="Search key...">
+      </div>
+
+      <div id="keysList">
+        <div class="empty">Loading keys...</div>
+      </div>
+
+      <button class="secondary" id="refreshBtn"
+        style="width:100%;margin-top:15px">
+        ↻ REFRESH KEYS
+      </button>
+    </section>
+
+    <button class="danger" id="logoutBtn"
+      style="width:100%">
+      LOGOUT
+    </button>
+
+  </main>
+
+  <div class="footer">KILLUA VIP PANEL</div>
 </div>
-
-<div id="dashboard" class="hidden">
-<div class="banner">
-<h1>KILLUA VIP</h1>
-<p>LICENSE KEY MANAGEMENT SYSTEM</p>
-<p class="sub">CONTROL PANEL</p>
-</div>
-
-<h2>CONTROL PANEL</h2>
-<p class="sub">Generate and manage your license keys</p>
-
-<div class="grid">
-<div class="stat"><small>TOTAL KEYS</small><h2 id="total">0</h2></div>
-<div class="stat"><small>ACTIVE</small><h2 class="green" id="active">0</h2></div>
-<div class="stat"><small>PAUSED</small><h2 class="yellow" id="paused">0</h2></div>
-<div class="stat"><small>EXPIRED</small><h2 class="red" id="expired">0</h2></div>
-</div>
-
-<div class="section">
-<h3>TIME EXPIRY</h3>
-<input id="duration" type="number" min="1" value="1">
-<select id="unit">
-<option value="minutes">Minutes</option>
-<option value="hours">Hours</option>
-<option value="days">Days</option>
-<option value="months">Months</option>
-</select>
-<button class="primary" onclick="generateKey()">GENERATE KEY</button>
-</div>
-
-<div class="section">
-<h3>GENERATED KEYS</h3>
-<button class="action" onclick="loadKeys()">REFRESH</button>
-<div id="keys"></div>
-</div>
-</div>
-
-<div id="message"></div>
-</main>
-
-<footer>© KILLUA VIP PANEL</footer>
 
 <script>
 const API_BASE = "https://killua-vip-api.onrender.com";
+
 let adminToken = "";
+let licenses = [];
+let countdownTimer = null;
 
-function message(text){
- document.getElementById("message").textContent=text;
+const $ = id => document.getElementById(id);
+
+function showMessage(id, message, color) {
+  const el = $(id);
+  el.textContent = message;
+  if (color) el.style.color = color;
 }
 
-async function api(path,method="GET",body=null){
- const response=await fetch(API_BASE+path,{
-  method,
-  headers:{
-   "Content-Type":"application/json",
-   "Authorization":"Bearer "+adminToken
-  },
-  body:body?JSON.stringify(body):null
- });
- const data=await response.json();
- if(!response.ok) throw new Error(data.message||"Request failed");
- return data;
+async function api(path, method = "GET", body = null) {
+  const options = {
+    method,
+    headers: {
+      "Authorization": "Bearer " + adminToken
+    }
+  };
+
+  if (body !== null) {
+    options.headers["Content-Type"] = "application/json";
+    options.body = JSON.stringify(body);
+  }
+
+  const response = await fetch(API_BASE + path, options);
+
+  let data = {};
+  try {
+    data = await response.json();
+  } catch (_) {}
+
+  if (!response.ok) {
+    throw new Error(data.error || data.message ||
+      "Request failed (" + response.status + ")");
+  }
+
+  return data;
 }
 
-async function login(){
- adminToken=document.getElementById("token").value.trim();
- if(!adminToken)return message("Enter your Admin Token.");
- try{
-  await loadKeys();
-  document.getElementById("login").classList.add("hidden");
-  document.getElementById("dashboard").classList.remove("hidden");
-  message("Login successful!");
- }catch(e){
-  adminToken="";
-  message("Login failed: "+e.message);
- }
+function formatDate(timestamp) {
+  if (!timestamp) return "Not available";
+
+  const date = new Date(timestamp);
+  if (Number.isNaN(date.getTime())) return "Not available";
+
+  return date.toLocaleString();
 }
 
-async function loadKeys(){
- const data=await api("/api/admin/keys");
- const keys=data.keys||[];
- document.getElementById("total").textContent=keys.length;
- document.getElementById("active").textContent=keys.filter(k=>k.status==="active").length;
- document.getElementById("paused").textContent=keys.filter(k=>k.status==="paused").length;
- document.getElementById("expired").textContent=keys.filter(k=>k.status==="expired").length;
-
- const container=document.getElementById("keys");
- container.innerHTML="";
-
- keys.forEach(k=>{
-  const div=document.createElement("div");
-  div.className="key";
-
-  const title=document.createElement("strong");
-  title.textContent=k.key;
-
-  const status=document.createElement("p");
-  status.className="status";
-  status.textContent=(k.status||"unknown").toUpperCase();
-
-  const pause=document.createElement("button");
-  pause.className="action";
-  pause.textContent=k.status==="paused"?"RESUME":"PAUSE";
-  pause.onclick=()=>changeStatus(k.id,k.status==="paused"?"resume":"pause");
-
-  const del=document.createElement("button");
-  del.className="action delete";
-  del.textContent="DELETE";
-  del.onclick=()=>deleteKey(k.id);
-
-  div.append(title,status,pause,del);
-  container.appendChild(div);
- });
+function formatDuration(duration, unit) {
+  if (!duration || !unit) return "Not available";
+  return duration + " " + unit;
 }
 
-async function generateKey(){
- const duration=Number(document.getElementById("duration").value);
- const unit=document.getElementById("unit").value;
- if(!Number.isInteger(duration)||duration<1)return message("Invalid expiry duration.");
+function getRemaining(expiresAt) {
+  const remaining = Number(expiresAt) - Date.now();
 
- try{
-  const data=await api("/api/admin/generate","POST",{duration,unit});
-  message("Key generated: "+data.key);
-  await loadKeys();
- }catch(e){message(e.message);}
+  if (!Number.isFinite(remaining) || remaining <= 0) {
+    return "EXPIRED";
+  }
+
+  const seconds = Math.floor(remaining / 1000);
+  const days = Math.floor(seconds / 86400);
+  const hours = Math.floor((seconds % 86400) / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const secs = seconds % 60;
+
+  return days + "d " + hours + "h " +
+    minutes + "m " + secs + "s";
 }
 
-async function changeStatus(id,action){
- try{
-  await api("/api/admin/keys/"+encodeURIComponent(id)+"/"+action,"POST");
-  message("Key updated.");
-  await loadKeys();
- }catch(e){message(e.message);}
+function makeElement(tag, className, text) {
+  const element = document.createElement(tag);
+  if (className) element.className = className;
+  if (text !== undefined) element.textContent = text;
+  return element;
 }
 
-async function deleteKey(id){
- if(!confirm("Delete this license key?"))return;
- try{
-  await api("/api/admin/keys/"+encodeURIComponent(id),"DELETE");
-  message("Key deleted.");
-  await loadKeys();
- }catch(e){message(e.message);}
+function addDetail(container, label, value, extraClass = "") {
+  const line = makeElement("div", "detail-line");
+  const left = makeElement("span", "", label);
+  const right = makeElement("span", extraClass, value);
+
+  line.append(left, right);
+  container.appendChild(line);
+  return right;
 }
+
+function updateStats() {
+  $("totalCount").textContent = licenses.length;
+  $("activeCount").textContent =
+    licenses.filter(x => x.status === "active").length;
+  $("pausedCount").textContent =
+    licenses.filter(x => x.status === "paused").length;
+  $("expiredCount").textContent =
+    licenses.filter(x => x.status === "expired").length;
+}
+
+function renderKeys() {
+  updateStats();
+
+  const list = $("keysList");
+  list.replaceChildren();
+
+  const search = $("searchInput").value
+    .trim().toLowerCase();
+
+  const filtered = licenses.filter(license =>
+    String(license.key || "").toLowerCase().includes(search)
+  );
+
+  if (!filtered.length) {
+    list.appendChild(makeElement(
+      "div", "empty",
+      licenses.length ? "No matching keys found." :
+      "No generated keys yet."
+    ));
+    return;
+  }
+
+  filtered.forEach(license => {
+    const card = makeElement("div", "key-card");
+
+    const top = makeElement("div", "key-top");
+    top.appendChild(makeElement("h3", "", "LICENSE KEY"));
+
+    const status = String(license.status || "unknown").toLowerCase();
+    const statusBadge = makeElement(
+      "span",
+      "status status-" + (
+        ["active", "paused", "expired"].includes(status)
+          ? status : "expired"
+      ),
+      status
+    );
+
+    top.appendChild(statusBadge);
+    card.appendChild(top);
+
+    card.appendChild(makeElement(
+      "div", "key-value", license.key || "Unknown key"
+    ));
+
+    const actions = makeElement("div", "key-actions");
+
+    const copyBtn = makeElement("button", "secondary", "COPY");
+    copyBtn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(
+          String(license.key || "")
+        );
+        copyBtn.textContent = "COPIED!";
+        setTimeout(() => copyBtn.textContent = "COPY", 1500);
+      } catch (_) {
+        showMessage(
+          "generateMessage",
+          "Copy unavailable. Select and copy the key manually."
+        );
+      }
+    });
+
+    const detailsBtn = makeElement(
+      "button", "secondary", "DETAILS"
+    );
+
+    const pauseBtn = makeElement(
+      "button",
+      status === "paused" ? "success" : "warning",
+      status === "paused" ? "RESUME" : "PAUSE"
+    );
+
+    pauseBtn.disabled =
+      status !== "active" && status !== "paused";
+
+    pauseBtn.addEventListener("click", async () => {
+      pauseBtn.disabled = true;
+
+      try {
+        const action = status === "paused" ? "resume" : "pause";
+        await api(
+          "/api/admin/keys/" + encodeURIComponent(license.id) +
+          "/" + action,
+          "POST"
+        );
+
+        await loadKeys();
+      } catch (error) {
+        alert(error.message);
+        pauseBtn.disabled = false;
+      }
+    });
+
+    const deleteBtn = makeElement(
+      "button", "danger", "DELETE"
+    );
+
+    deleteBtn.addEventListener("click", async () => {
+      if (!confirm("Delete this key permanently?")) return;
+
+      deleteBtn.disabled = true;
+
+      try {
+        await api(
+          "/api/admin/keys/" + encodeURIComponent(license.id),
+          "DELETE"
+        );
+        await loadKeys();
+      } catch (error) {
+        alert(error.message);
+        deleteBtn.disabled = false;
+      }
+    });
+
+    actions.append(copyBtn, detailsBtn, pauseBtn, deleteBtn);
+    card.appendChild(actions);
+
+    const details = makeElement("div", "details");
+
+    addDetail(
+      details, "Key ID",
+      license.id || "Not available"
+    );
+
+    addDetail(
+      details, "Validity",
+      formatDuration(license.duration, license.unit)
+    );
+
+    addDetail(
+      details, "Created",
+      formatDate(license.createdAt)
+    );
+
+    addDetail(
+      details, "Expires",
+      formatDate(license.expiresAt)
+    );
+
+    const countdown = addDetail(
+      details, "Time Remaining",
+      getRemaining(license.expiresAt),
+      "countdown"
+    );
+
+    detailsBtn.addEventListener("click", () => {
+      details.classList.toggle("open");
+      detailsBtn.textContent =
+        details.classList.contains("open")
+          ? "HIDE DETAILS" : "DETAILS";
+    });
+
+    card.appendChild(details);
+    list.appendChild(card);
+
+    if (details.classList.contains("open")) {
+      countdown.textContent = getRemaining(license.expiresAt);
+    }
+  });
+}
+
+async function loadKeys() {
+  $("refreshBtn").disabled = true;
+
+  try {
+    const data = await api("/api/admin/keys");
+    licenses = Array.isArray(data.keys) ? data.keys : [];
+    renderKeys();
+  } catch (error) {
+    showMessage("generateMessage", error.message, "#fda4af");
+
+    if (error.message.toLowerCase().includes("unauthorized") ||
+        error.message.toLowerCase().includes("invalid token")) {
+      logout();
+    }
+  } finally {
+    $("refreshBtn").disabled = false;
+  }
+}
+
+async function login() {
+  const token = $("tokenInput").value.trim();
+
+  if (!token) {
+    showMessage("loginMessage", "Enter your admin token.", "#fda4af");
+    return;
+  }
+
+  adminToken = token;
+  $("loginBtn").disabled = true;
+
+  try {
+    await loadKeys();
+
+    $("loginScreen").classList.add("hidden");
+    $("mainPanel").classList.remove("hidden");
+
+    if (countdownTimer) clearInterval(countdownTimer);
+
+    countdownTimer = setInterval(() => {
+      document.querySelectorAll(".key-card").forEach(card => {
+        const details = card.querySelector(".details");
+        if (!details || !details.classList.contains("open")) return;
+
+        const keyText = card.querySelector(".key-value")?.textContent;
+        const license = licenses.find(x => x.key === keyText);
+        const countdown = details.querySelector(".countdown");
+
+        if (license && countdown) {
+          countdown.textContent = getRemaining(license.expiresAt);
+        }
+      });
+    }, 1000);
+
+  } catch (error) {
+    adminToken = "";
+    showMessage("loginMessage", error.message, "#fda4af");
+  } finally {
+    $("loginBtn").disabled = false;
+  }
+}
+
+async function generateKey() {
+  const duration = Number($("durationInput").value);
+  const unit = $("unitInput").value;
+
+  if (!Number.isInteger(duration) || duration < 1 || duration > 365) {
+    showMessage(
+      "generateMessage",
+      "Duration must be a whole number from 1 to 365.",
+      "#fda4af"
+    );
+    return;
+  }
+
+  $("generateBtn").disabled = true;
+  $("generateBtn").textContent = "GENERATING...";
+
+  try {
+    const data = await api("/api/admin/generate", "POST", {
+      duration,
+      unit
+    });
+
+    showMessage(
+      "generateMessage",
+      "Key generated: " + (data.key || "Success"),
+      "#86efac"
+    );
+
+    await loadKeys();
+
+  } catch (error) {
+    showMessage("generateMessage", error.message, "#fda4af");
+  } finally {
+    $("generateBtn").disabled = false;
+    $("generateBtn").textContent = "GENERATE KEY";
+  }
+}
+
+function logout() {
+  adminToken = "";
+  licenses = [];
+
+  if (countdownTimer) {
+    clearInterval(countdownTimer);
+    countdownTimer = null;
+  }
+
+  $("mainPanel").classList.add("hidden");
+  $("loginScreen").classList.remove("hidden");
+  $("tokenInput").value = "";
+  $("keysList").replaceChildren();
+  $("loginMessage").textContent = "";
+  $("generateMessage").textContent = "";
+}
+
+$("loginBtn").addEventListener("click", login);
+
+$("tokenInput").addEventListener("keydown", event => {
+  if (event.key === "Enter") login();
+});
+
+$("generateBtn").addEventListener("click", generateKey);
+$("refreshBtn").addEventListener("click", loadKeys);
+$("logoutBtn").addEventListener("click", logout);
+$("searchInput").addEventListener("input", renderKeys);
 </script>
 </body>
 </html>
